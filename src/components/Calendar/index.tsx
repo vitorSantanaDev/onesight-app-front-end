@@ -1,15 +1,31 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
+
+import AppointmentCreationModal from '../AppointmentCreationModal'
+
+import * as S from './styles'
 
 import 'react-calendar/dist/Calendar.css'
 
 function CalendarComponent() {
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [showModal, setShowModal] = useState(false)
+  const [selectedDate, setSelectedDate] = useState<Date>()
+
+  useEffect(() => {
+    if (selectedDate) {
+      setShowModal(true)
+    }
+  }, [selectedDate])
 
   return (
-    <Fragment>
+    <S.CalendarWrapper>
+      <AppointmentCreationModal
+        isVisible={showModal}
+        onCloseHandler={setShowModal}
+        appointmentDate={selectedDate as Date}
+      />
       <Calendar onChange={setSelectedDate} value={selectedDate} />
-    </Fragment>
+    </S.CalendarWrapper>
   )
 }
 
