@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
 
-import CalendarComponent from './components/Calendar'
+import RoutesApp from './routes'
 
 function App() {
   return (
     <Fragment>
-      <CalendarComponent />
+      <RoutesApp />
     </Fragment>
   )
 }
