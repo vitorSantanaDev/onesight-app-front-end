@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
-import { AppointmentCard, Calendar } from '../../components'
+import { AppointmentCard, Calendar, TitleComponent } from '../../components'
 import { AppointmentsContext } from '../../contexts/AppointmentsContext'
 import { ModalContext } from '../../contexts/ModalContext'
 
@@ -25,6 +25,9 @@ const Home = () => {
 
   return (
     <S.HomePageWrapper>
+      <S.TitleWrapper>
+        <TitleComponent>Marque os seus compromissos</TitleComponent>
+      </S.TitleWrapper>
       <Calendar />
       <S.AppointmentsWrapper>
         {appointments.length > 0 &&

@@ -4,6 +4,11 @@ export const HomePageWrapper = styled.main`
   width: 100%;
 `
 
+export const TitleWrapper = styled.div`
+  padding: 24px;
+  text-align: center;
+`
+
 export const AppointmentsWrapper = styled.section`
   gap: 30px;
   display: grid;

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { IAppointment } from '../../interfaces/appointments'
 import { getAppointment } from '../../services/appointments.service'
 
-import { AppointmentDetailComponent } from '../../components'
+import { AppointmentDetailComponent, TitleComponent } from '../../components'
 
 import * as S from './styles'
 
@@ -25,6 +25,7 @@ const AppointmentDetailsPage = () => {
 
   return (
     <S.AppointmentDetailsPageWrapper>
+      <TitleComponent>Detalhes do compromisso</TitleComponent>
       {appointmentState && <AppointmentDetailComponent {...appointmentState} />}
     </S.AppointmentDetailsPageWrapper>
   )
