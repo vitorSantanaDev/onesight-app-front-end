@@ -1,18 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Close } from '@styled-icons/material-outlined'
 
 import AppointmentRegistrationForm from '../AppointmentRegistrationForm'
 
-import { IAppointmentCreationModalProps } from './types'
+import { ModalContext } from '../../contexts/ModalContext'
 
 import * as S from './styles'
 
-const AppointmentCreationModal = (props: IAppointmentCreationModalProps) => {
-  const { isVisible, onCloseHandler, appointmentDate } = props
+const AppointmentCreationModal = () => {
+  const { showModal, setShowModal } = useContext(ModalContext)
 
   return (
     <Fragment>
-      {isVisible ? (
+      {showModal ? (
         <S.ModalWrapper>
           <S.ModalContentWrapper>
             <S.ButtonCloseModalWrapper>
@@ -20,10 +20,10 @@ const AppointmentCreationModal = (props: IAppointmentCreationModalProps) => {
                 size={32}
                 cursor="pointer"
                 color="#1a1a1a"
-                onClick={() => onCloseHandler(!isVisible)}
+                onClick={() => setShowModal?.(!showModal)}
               />
             </S.ButtonCloseModalWrapper>
-            <AppointmentRegistrationForm appointmentDate={appointmentDate} />
+            <AppointmentRegistrationForm />
           </S.ModalContentWrapper>
         </S.ModalWrapper>
       ) : null}
