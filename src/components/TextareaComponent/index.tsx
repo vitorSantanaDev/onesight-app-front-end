@@ -1,5 +1,7 @@
 import React from 'react'
 
+import LabelComponent from '../LabelComponent'
+
 import { ITextareaComponentProps } from './types'
 
 import * as S from './styles'
@@ -9,7 +11,7 @@ const TextareaComponent = (props: ITextareaComponentProps) => {
 
   return (
     <S.TextareaWrapper>
-      <S.TextareaLabel>{label}</S.TextareaLabel>
+      <LabelComponent>{label}</LabelComponent>
       <S.TextareaElement
         name={name}
         value={value}

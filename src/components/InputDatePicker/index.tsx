@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import DatePicker, { registerLocale } from 'react-datepicker'
+import React from 'react'
+import { registerLocale } from 'react-datepicker'
 import ptBR from 'date-fns/locale/pt-BR'
+
+import LabelComponent from '../LabelComponent'
 
 import { IInputDatePickerProps } from './types'
 
@@ -12,11 +14,15 @@ registerLocale('pt-BR', ptBR)
 const InputDatePicker = (props: IInputDatePickerProps) => {
   const { date, setDate } = props
   return (
-    <S.InputElement
-      locale="pt-BR"
-      selected={date}
-      onChange={(date: Date) => setDate(date)}
-    />
+    <S.InputWrapper>
+      <LabelComponent>Escolha uma data*</LabelComponent>
+      <S.InputElement
+        locale="pt-BR"
+        selected={date}
+        placeholderText="Defina uma data para seu compromisso"
+        onChange={(date: Date) => setDate(date)}
+      />
+    </S.InputWrapper>
   )
 }
 

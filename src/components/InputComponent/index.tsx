@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import LabelComponent from '../LabelComponent'
+
+import { IInputComponentProps } from './types'
 
 import * as S from './styles'
-import { IInputComponentProps } from './types'
 
 const InputComponent = (props: IInputComponentProps) => {
   const { label, name, placeholder, type, onChangeHandler, value } = props
 
   return (
     <S.InputWrapper>
-      <S.InputLabel htmlFor={name}>{label}</S.InputLabel>
+      <LabelComponent htmlFor={name}>{label}</LabelComponent>
       <S.InputElement
         id={name}
         name={name}

@@ -2,6 +2,14 @@ import styled from 'styled-components'
 
 export const TextareaWrapper = styled.div``
 
-export const TextareaLabel = styled.label``
+export const TextareaElement = styled.textarea`
+  width: 100%;
+  outline: none;
+  padding: 16px;
+  margin-bottom: 16px;
 
-export const TextareaElement = styled.textarea``
+  border: 1px solid #1b1b1b;
+
+  color: #50545c;
+  resize: none;
+`
