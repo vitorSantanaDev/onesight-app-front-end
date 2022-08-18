@@ -1,2 +1,2 @@
 export { default as Home } from './Home'
-export { default as AppointmentDetails } from './AppointmentDetails'
+export { default as AppointmentDetailsPage } from './AppointmentDetails'
