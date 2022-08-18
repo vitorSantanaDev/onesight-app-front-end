@@ -1,20 +1,28 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useContext,
+  useState
+} from 'react'
+import { toast } from 'react-toastify'
 
 import ButtonComponent from '../ButtonComponent'
 import InputComponent from '../InputComponent'
 import InputDatePicker from '../InputDatePicker'
 import TextareaComponent from '../TextareaComponent'
 
-import { IAppointmentRegistrationFormProps } from './types'
+import { DateContext } from '../../contexts/DateContext'
+import { ModalContext } from '../../contexts/ModalContext'
+
+import { createAppointment } from '../../services/appointments.service'
 
 import * as S from './styles'
 
-const AppointmentRegistrationForm = (
-  props: IAppointmentRegistrationFormProps
-) => {
-  const { appointmentDate } = props
-
-  const [newDateSelected, setNewDateSelected] = useState<Date>(appointmentDate)
+const AppointmentRegistrationForm = () => {
+  const { showModal, setShowModal } = useContext(ModalContext)
+  const { selectedDate, setSelectedDate } = useContext(DateContext)
   const [appointmentName, setAppointmentName] = useState('')
   const [notesAboutTheAppointment, setNotesAboutTheAppointment] = useState('')
 
@@ -30,15 +38,27 @@ const AppointmentRegistrationForm = (
     setNotesAboutTheAppointment(target.value)
   }
 
-  useEffect(() => {
-    if (appointmentDate) {
-      setNewDateSelected(appointmentDate)
-    }
-  }, [appointmentDate])
+  const registeringNewAppointment = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    ;(async () => {
+      if (selectedDate) {
+        await createAppointment({
+          date: selectedDate,
+          name: appointmentName,
+          description: notesAboutTheAppointment
+        })
+        toast.success(`Lembrete definido com sucesso!`)
+        setShowModal?.(!showModal)
+      }
+    })()
+  }
 
   return (
-    <S.FormWrapper>
-      <InputDatePicker date={newDateSelected} setDate={setNewDateSelected} />
+    <S.FormWrapper onSubmit={registeringNewAppointment}>
+      <InputDatePicker
+        date={selectedDate ? selectedDate : new Date()}
+        setDate={setSelectedDate as Dispatch<SetStateAction<Date>>}
+      />
       <InputComponent
         type="text"
         name="event"
@@ -54,9 +74,9 @@ const AppointmentRegistrationForm = (
         onChangeHandler={notesAboutTheAppointmentHandler}
         placeholder="Digite aqui observações sobre seu evento/compromisso"
       />
-      <ButtonComponent onClickHandler={() => console.log('Salvando')}>
-        Salvar
-      </ButtonComponent>
+      <S.ButtonSubmitWrapper>
+        <ButtonComponent type="submit">Salvar</ButtonComponent>
+      </S.ButtonSubmitWrapper>
     </S.FormWrapper>
   )
 }
