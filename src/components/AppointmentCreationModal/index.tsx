@@ -5,9 +5,18 @@ import AppointmentRegistrationForm from '../AppointmentRegistrationForm'
 
 import { ModalContext } from '../../contexts/ModalContext'
 
+import { IAppointmentCreationModalProps } from './types'
+
 import * as S from './styles'
 
-const AppointmentCreationModal = () => {
+const AppointmentCreationModal = (props: IAppointmentCreationModalProps) => {
+  const {
+    valueDate,
+    isItEditing,
+    appointmentID,
+    valueNameAppointment,
+    valueDescriptionAppointment
+  } = props
   const { showModal, setShowModal } = useContext(ModalContext)
 
   return (
@@ -23,7 +32,13 @@ const AppointmentCreationModal = () => {
                 onClick={() => setShowModal?.(!showModal)}
               />
             </S.ButtonCloseModalWrapper>
-            <AppointmentRegistrationForm />
+            <AppointmentRegistrationForm
+              valueDate={valueDate}
+              isItEditing={isItEditing}
+              appointmentID={appointmentID}
+              valueNameAppointment={valueNameAppointment}
+              valueDescriptionAppointment={valueDescriptionAppointment}
+            />
           </S.ModalContentWrapper>
         </S.ModalWrapper>
       ) : null}

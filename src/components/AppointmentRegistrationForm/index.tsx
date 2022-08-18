@@ -1,12 +1,14 @@
 import React, {
-  ChangeEvent,
   Dispatch,
   FormEvent,
-  SetStateAction,
   useContext,
-  useState
+  ChangeEvent,
+  SetStateAction,
+  useState,
+  useEffect
 } from 'react'
 import { toast } from 'react-toastify'
+import { parseISO } from 'date-fns'
 
 import ButtonComponent from '../ButtonComponent'
 import InputComponent from '../InputComponent'
@@ -16,15 +18,42 @@ import TextareaComponent from '../TextareaComponent'
 import { DateContext } from '../../contexts/DateContext'
 import { ModalContext } from '../../contexts/ModalContext'
 
-import { createAppointment } from '../../services/appointments.service'
+import {
+  createAppointment,
+  updatingAppointment
+} from '../../services/appointments.service'
+
+import { IAppointmentRegistrationFormProps } from './types'
 
 import * as S from './styles'
 
-const AppointmentRegistrationForm = () => {
+const AppointmentRegistrationForm = (
+  props: IAppointmentRegistrationFormProps
+) => {
+  const {
+    valueDate,
+    isItEditing,
+    appointmentID,
+    valueNameAppointment,
+    valueDescriptionAppointment
+  } = props
+
   const { showModal, setShowModal } = useContext(ModalContext)
   const { selectedDate, setSelectedDate } = useContext(DateContext)
-  const [appointmentName, setAppointmentName] = useState('')
-  const [notesAboutTheAppointment, setNotesAboutTheAppointment] = useState('')
+
+  const [appointmentName, setAppointmentName] = useState(
+    valueNameAppointment ? valueNameAppointment : ''
+  )
+  const [notesAboutTheAppointment, setNotesAboutTheAppointment] = useState(
+    valueDescriptionAppointment ? valueDescriptionAppointment : ''
+  )
+
+  useEffect(() => {
+    if (valueDate) {
+      setSelectedDate?.(parseISO(String(valueDate)))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueDate])
 
   const appointmentNameHandler = ({
     target
@@ -38,8 +67,7 @@ const AppointmentRegistrationForm = () => {
     setNotesAboutTheAppointment(target.value)
   }
 
-  const registeringNewAppointment = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const registeringNewAppointment = () => {
     ;(async () => {
       if (selectedDate) {
         await createAppointment({
@@ -53,11 +81,36 @@ const AppointmentRegistrationForm = () => {
     })()
   }
 
+  const editingAppointmentData = () => {
+    ;(async () => {
+      if (appointmentID) {
+        await updatingAppointment(appointmentID, {
+          name: appointmentName,
+          date: selectedDate as Date,
+          description: notesAboutTheAppointment
+        })
+        toast.success(`Lembrete Atualizado com sucesso!`)
+        setShowModal?.(!showModal)
+      }
+    })()
+  }
+
+  const formSubmissionHandlerFunction = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (isItEditing) {
+      editingAppointmentData()
+      return
+    }
+    registeringNewAppointment()
+  }
+
+  const dateValueValid = selectedDate ? selectedDate : new Date()
+
   return (
-    <S.FormWrapper onSubmit={registeringNewAppointment}>
+    <S.FormWrapper onSubmit={formSubmissionHandlerFunction}>
       <InputDatePicker
-        date={selectedDate ? selectedDate : new Date()}
         setDate={setSelectedDate as Dispatch<SetStateAction<Date>>}
+        date={dateValueValid}
       />
       <InputComponent
         type="text"
@@ -75,7 +128,9 @@ const AppointmentRegistrationForm = () => {
         placeholder="Digite aqui observações sobre seu evento/compromisso"
       />
       <S.ButtonSubmitWrapper>
-        <ButtonComponent type="submit">Salvar</ButtonComponent>
+        <ButtonComponent type="submit">
+          {isItEditing ? 'Editar' : 'Salvar'}
+        </ButtonComponent>
       </S.ButtonSubmitWrapper>
     </S.FormWrapper>
   )

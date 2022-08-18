@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const ModalWrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
+  padding: 0px 32px;
   z-index: 1000;
 
   position: absolute;

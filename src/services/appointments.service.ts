@@ -62,3 +62,19 @@ export async function deleteAppointment(appointmentID: string) {
     console.log(error.message)
   }
 }
+
+export async function updatingAppointment(
+  appointmentID: string,
+  payload: Partial<IAppointment>
+) {
+  try {
+    const response = await axiosInstance.patch(
+      `/appointments/${appointmentID}`,
+      { ...payload }
+    )
+    return response.data
+  } catch (err) {
+    const error = err as any
+    console.log(error.message)
+  }
+}
