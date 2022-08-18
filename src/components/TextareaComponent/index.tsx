@@ -13,6 +13,7 @@ const TextareaComponent = (props: ITextareaComponentProps) => {
     <S.TextareaWrapper>
       <LabelComponent>{label}</LabelComponent>
       <S.TextareaElement
+        required
         name={name}
         value={value}
         placeholder={placeholder}

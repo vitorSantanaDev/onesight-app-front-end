@@ -17,6 +17,7 @@ const InputDatePicker = (props: IInputDatePickerProps) => {
     <S.InputWrapper>
       <LabelComponent>Escolha uma data*</LabelComponent>
       <S.InputElement
+        required
         locale="pt-BR"
         selected={date}
         placeholderText="Defina uma data para seu compromisso"

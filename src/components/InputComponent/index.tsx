@@ -13,6 +13,7 @@ const InputComponent = (props: IInputComponentProps) => {
     <S.InputWrapper>
       <LabelComponent htmlFor={name}>{label}</LabelComponent>
       <S.InputElement
+        required
         id={name}
         name={name}
         type={type}
