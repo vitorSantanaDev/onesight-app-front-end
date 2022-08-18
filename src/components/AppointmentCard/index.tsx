@@ -11,7 +11,7 @@ import {
   CalendarAdd
 } from '@styled-icons/fluentui-system-filled'
 
-import { Delete } from '@styled-icons/material-outlined'
+import { Delete, LockOpen } from '@styled-icons/material-outlined'
 
 import {
   AppointmentStatusEnum,
@@ -55,6 +55,13 @@ const AppointmentCard = (props: IAppointmentCardProps) => {
       ? '#1a1a1a'
       : '#ffff'
 
+  const status =
+    appointmentState.status === AppointmentStatusEnum.APPROVED
+      ? 'Aceito'
+      : appointmentState.status === AppointmentStatusEnum.CANCELED
+      ? 'Cancelado'
+      : 'Em Aberto'
+
   const appointmentDateFormatted = String(
     format(new Date(appointmentState.date), "iiii',' dd/MM/yyyy '-' p", {
       locale: ptBR
@@ -86,6 +93,27 @@ const AppointmentCard = (props: IAppointmentCardProps) => {
 
   const deletingAppointmentHandler = () => deletingAppointment(ID)
 
+  const cancelingAppointmentHandler = () => {
+    updatingStatusOfAppointment(ID, AppointmentStatusEnum.CANCELED)
+  }
+
+  const approvingAppointmentHandler = () => {
+    updatingStatusOfAppointment(ID, AppointmentStatusEnum.APPROVED)
+  }
+
+  const openingAppointmentHandler = () => {
+    updatingStatusOfAppointment(ID, AppointmentStatusEnum.OPENED)
+  }
+
+  const buttonToApproveAppointmentDisabled =
+    appointmentState.status === AppointmentStatusEnum.APPROVED ? true : false
+
+  const buttonToCancelAppointmentDisabled =
+    appointmentState.status === AppointmentStatusEnum.CANCELED ? true : false
+
+  const buttonToOpenAppointmentDisabled =
+    appointmentState.status === AppointmentStatusEnum.OPENED ? true : false
+
   return (
     <Fragment>
       {appointmentState && (
@@ -98,17 +126,19 @@ const AppointmentCard = (props: IAppointmentCardProps) => {
               <Delete size={22} color={iconColor} />
             </S.ButtonDeleteAppointment>
           </S.AppointmentCardHeader>
+
           <S.AppointmentCardDate status={appointmentStatusValid}>
-            {appointmentDateFormatted}
+            {appointmentDateFormatted}{' '}
+            <S.StatusLabel>Status - {status}</S.StatusLabel>
           </S.AppointmentCardDate>
+
           <S.AppointmentCardDescription status={appointmentStatusValid}>
             {appointmentState.description}
           </S.AppointmentCardDescription>
           <S.ButtonsActionsWrapper>
             <S.ButtonAction
-              onClick={() =>
-                updatingStatusOfAppointment(ID, AppointmentStatusEnum.CANCELED)
-              }
+              onClick={cancelingAppointmentHandler}
+              disabled={buttonToCancelAppointmentDisabled}
             >
               <CalendarCancel size={22} color={iconColor} />
             </S.ButtonAction>
@@ -118,9 +148,14 @@ const AppointmentCard = (props: IAppointmentCardProps) => {
               </S.ButtonActionDetails>
             </Link>
             <S.ButtonAction
-              onClick={() =>
-                updatingStatusOfAppointment(ID, AppointmentStatusEnum.APPROVED)
-              }
+              onClick={openingAppointmentHandler}
+              disabled={buttonToOpenAppointmentDisabled}
+            >
+              <LockOpen size={22} color={iconColor} />
+            </S.ButtonAction>
+            <S.ButtonAction
+              onClick={approvingAppointmentHandler}
+              disabled={buttonToApproveAppointmentDisabled}
             >
               <CalendarAdd size={22} color={iconColor} />
             </S.ButtonAction>

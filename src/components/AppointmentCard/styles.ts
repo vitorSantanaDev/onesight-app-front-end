@@ -133,6 +133,10 @@ export const ButtonAction = styled.button`
   &:hover {
     transform: scale(1.01);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `
 
 export const ButtonActionDetails = styled.button<AppointmentStatus>`
@@ -159,4 +163,9 @@ export const ButtonActionDetails = styled.button<AppointmentStatus>`
   &:hover {
     transform: scale(1.01);
   }
+`
+
+export const StatusLabel = styled.strong`
+  margin-top: 10px;
+  display: inline-block;
 `
