@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { AppointmentDetails, Home } from '../pages'
+import { AppointmentDetailsPage, Home } from '../pages'
 
 import { routesNameEnum } from './routesEnum'
 
@@ -11,8 +11,8 @@ const RoutesApp = () => {
       <Routes>
         <Route path={routesNameEnum.HOME} element={<Home />} />
         <Route
-          path={routesNameEnum.APPOINTMENT_DETAILS}
-          element={<AppointmentDetails />}
+          path={`${routesNameEnum.APPOINTMENT_DETAILS}/:ID`}
+          element={<AppointmentDetailsPage />}
         />
       </Routes>
     </BrowserRouter>
