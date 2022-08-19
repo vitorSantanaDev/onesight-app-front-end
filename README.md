@@ -58,7 +58,10 @@
 ## Status do compromisso.
 
 <br>
+
 📃 Se você observar bem no card há uma label com a palavra "Status" seguido de um "-" mais o status em si. Conforme você for clicando nos botões de ações, o status do compromisso é alterado e a cor do card, textos e botões também mudam, para indicar o status do compromisso.
+
+<br>
 
 <div>
   <img align="left" src="./src/assets/status-oppened.png" height="120">
