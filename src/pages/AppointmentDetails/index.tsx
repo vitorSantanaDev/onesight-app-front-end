@@ -8,7 +8,11 @@ import { getAppointment } from '../../services/appointments.service'
 
 import Illustration from '../../assets/undraw_time_management_re_tk5w.svg'
 
-import { AppointmentDetailComponent, TitleComponent } from '../../components'
+import {
+  AppointmentDetailComponent,
+  Loading,
+  TitleComponent
+} from '../../components'
 
 import * as S from './styles'
 
@@ -16,11 +20,14 @@ const AppointmentDetailsPage = () => {
   const { ID: appointmentID } = useParams()
   const { showModal } = useContext(ModalContext)
   const [appointmentState, setAppointmentState] = useState<IAppointment>()
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchAppointment = () => {
     ;(async () => {
       if (appointmentID) {
+        setIsLoading(true)
         const appointmentData = await getAppointment(appointmentID)
+        setIsLoading(false)
         setAppointmentState(appointmentData.data.appointment)
       }
     })()
@@ -32,8 +39,12 @@ const AppointmentDetailsPage = () => {
     <S.AppointmentDetailsPageWrapper>
       <TitleComponent>Detalhes do compromisso</TitleComponent>
       <S.SectionHeroWrapper>
-        {appointmentState && (
+        {appointmentState && !isLoading ? (
           <AppointmentDetailComponent {...appointmentState} />
+        ) : (
+          <S.LoadingWrapper>
+            <Loading />
+          </S.LoadingWrapper>
         )}
         <S.Illustration src={Illustration} />
       </S.SectionHeroWrapper>

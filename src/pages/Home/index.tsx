@@ -1,8 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { ModalContext } from '../../contexts/ModalContext'
 import { AppointmentsContext } from '../../contexts/AppointmentsContext'
-import { AppointmentCard, Calendar, TitleComponent } from '../../components'
+import {
+  AppointmentCard,
+  Calendar,
+  Loading,
+  TitleComponent
+} from '../../components'
 
 import Illustration from '../../assets/undraw_date_picker_re_r0p8.svg'
 
@@ -15,10 +20,13 @@ import * as S from './styles'
 const Home = () => {
   const { showModal, setShowModal } = useContext(ModalContext)
   const { appointments, setAppointments } = useContext(AppointmentsContext)
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchAllAppointments = () => {
     ;(async () => {
+      setIsLoading(true)
       const appointmentsData = await getAllAppointments()
+      setIsLoading(false)
       setAppointments?.(appointmentsData.data.appointments)
     })()
   }
@@ -39,9 +47,9 @@ const Home = () => {
         <Calendar />
         <S.Illustration src={Illustration} alt="" />
       </S.SectionHeroWrapper>
-      <S.AppointmentsWrapper>
-        {appointments.length > 0 &&
-          appointments.map(({ name, description, date, status, _id }) => (
+      {appointments.length > 0 && !isLoading ? (
+        <S.AppointmentsWrapper>
+          {appointments.map(({ name, description, date, status, _id }) => (
             <AppointmentCard
               key={_id}
               ID={_id as string}
@@ -51,7 +59,12 @@ const Home = () => {
               appointmentStatus={status as AppointmentStatusEnum}
             />
           ))}
-      </S.AppointmentsWrapper>
+        </S.AppointmentsWrapper>
+      ) : (
+        <S.LoadingWrapper>
+          <Loading />
+        </S.LoadingWrapper>
+      )}
     </S.HomePageWrapper>
   )
 }

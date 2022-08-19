@@ -36,3 +36,9 @@ export const SectionHeroWrapper = styled.section`
 export const Illustration = styled.img`
   width: 100%;
 `
+
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`
