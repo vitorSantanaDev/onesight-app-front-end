@@ -63,7 +63,7 @@ const AppointmentCard = (props: IAppointmentCardProps) => {
       : 'Em Aberto'
 
   const appointmentDateFormatted = String(
-    format(new Date(appointmentState.date), "iiii',' dd/MM/yyyy '-' p", {
+    format(new Date(appointmentState.date), "iiii',' dd/MM/yyyy", {
       locale: ptBR
     })
   )

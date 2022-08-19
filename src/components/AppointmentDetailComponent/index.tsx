@@ -24,7 +24,7 @@ const AppointmentDetailComponent = (
   const { date, description, name, status, _id } = props
 
   const dateAppointmentFormated = String(
-    format(new Date(date), "iiii',' dd/MM/yyyy '-' p", { locale: ptBR })
+    format(new Date(date), "iiii',' dd/MM/yyyy", { locale: ptBR })
   )
 
   const appointmentStatusValid = status as AppointmentStatusEnum
