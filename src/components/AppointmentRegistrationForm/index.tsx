@@ -44,7 +44,7 @@ const AppointmentRegistrationForm = (
   const [appointmentName, setAppointmentName] = useState(
     valueNameAppointment ? valueNameAppointment : ''
   )
-  const [notesAboutTheAppointment, setNotesAboutTheAppointment] = useState(
+  const [descriptionAppointment, setDescriptionAppointment] = useState(
     valueDescriptionAppointment ? valueDescriptionAppointment : ''
   )
 
@@ -61,10 +61,10 @@ const AppointmentRegistrationForm = (
     setAppointmentName(target.value)
   }
 
-  const notesAboutTheAppointmentHandler = ({
+  const descriptionAppointmentHandler = ({
     target
   }: ChangeEvent<HTMLTextAreaElement>) => {
-    setNotesAboutTheAppointment(target.value)
+    setDescriptionAppointment(target.value)
   }
 
   const registeringNewAppointment = () => {
@@ -73,7 +73,7 @@ const AppointmentRegistrationForm = (
         await createAppointment({
           date: selectedDate,
           name: appointmentName,
-          description: notesAboutTheAppointment
+          description: descriptionAppointment
         })
         toast.success(`Lembrete definido com sucesso!`)
         setShowModal?.(!showModal)
@@ -87,7 +87,7 @@ const AppointmentRegistrationForm = (
         await updatingAppointment(appointmentID, {
           name: appointmentName,
           date: selectedDate as Date,
-          description: notesAboutTheAppointment
+          description: descriptionAppointment
         })
         toast.success(`Lembrete Atualizado com sucesso!`)
         setShowModal?.(!showModal)
@@ -114,18 +114,18 @@ const AppointmentRegistrationForm = (
       />
       <InputComponent
         type="text"
-        name="event"
+        name="appointment"
         value={appointmentName}
-        label="Evento/compromisso"
+        label="Compromisso*"
         onChangeHandler={appointmentNameHandler}
-        placeholder="Digite aqui o nome do seu evento/compromisso"
+        placeholder="Digite aqui o nome do seu compromisso"
       />
       <TextareaComponent
-        name="nota"
-        label="Nota"
-        value={notesAboutTheAppointment}
-        onChangeHandler={notesAboutTheAppointmentHandler}
-        placeholder="Digite aqui observações sobre seu evento/compromisso"
+        name="description"
+        label="Descrição*"
+        value={descriptionAppointment}
+        onChangeHandler={descriptionAppointmentHandler}
+        placeholder="Digite aqui observações sobre seu compromisso"
       />
       <S.ButtonSubmitWrapper>
         <ButtonComponent type="submit">
