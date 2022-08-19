@@ -11,7 +11,10 @@ import {
 
 import Illustration from '../../assets/undraw_date_picker_re_r0p8.svg'
 
-import { AppointmentStatusEnum } from '../../interfaces/appointments'
+import {
+  AppointmentStatusEnum,
+  IAppointment
+} from '../../interfaces/appointments'
 
 import { getAllAppointments } from '../../services/appointments.service'
 
@@ -27,7 +30,15 @@ const Home = () => {
       setIsLoading(true)
       const appointmentsData = await getAllAppointments()
       setIsLoading(false)
-      setAppointments?.(appointmentsData.data.appointments)
+
+      const sortingAppointmentByDate = appointmentsData.data.appointments.sort(
+        (a: IAppointment, b: IAppointment) => {
+          const createdAtItemA = new Date(a.date).getTime()
+          const createdAtItemB = new Date(b.date).getTime()
+          return createdAtItemA - createdAtItemB
+        }
+      )
+      setAppointments?.(sortingAppointmentByDate)
     })()
   }
 
