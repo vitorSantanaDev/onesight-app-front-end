@@ -47,7 +47,7 @@ const Home = () => {
         <Calendar />
         <S.Illustration src={Illustration} alt="" />
       </S.SectionHeroWrapper>
-      {appointments.length > 0 && !isLoading ? (
+      {appointments && !isLoading ? (
         <S.AppointmentsWrapper>
           {appointments.map(({ name, description, date, status, _id }) => (
             <AppointmentCard
