@@ -64,7 +64,7 @@
 <br>
 
 <div>
-  <img align="left" src="./src/assets/status-oppened.png" height="120">
+  <img align="center" src="./src/assets/status-oppened.png" height="120">
   <img align="center" src="./src/assets/status-cancel.png" height="120">
   <img align="center" src="./src/assets/status-approved.png" height="120">
 </div>
