@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
+import { ModalContext } from '../../contexts/ModalContext'
 
 import { IAppointment } from '../../interfaces/appointments'
 import { getAppointment } from '../../services/appointments.service'
@@ -10,6 +12,7 @@ import * as S from './styles'
 
 const AppointmentDetailsPage = () => {
   const { ID: appointmentID } = useParams()
+  const { showModal } = useContext(ModalContext)
   const [appointmentState, setAppointmentState] = useState<IAppointment>()
 
   const fetchAppointment = () => {
@@ -21,7 +24,7 @@ const AppointmentDetailsPage = () => {
     })()
   }
 
-  useEffect(fetchAppointment, [appointmentID])
+  useEffect(fetchAppointment, [appointmentID, showModal])
 
   return (
     <S.AppointmentDetailsPageWrapper>
