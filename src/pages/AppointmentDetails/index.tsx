@@ -6,6 +6,8 @@ import { ModalContext } from '../../contexts/ModalContext'
 import { IAppointment } from '../../interfaces/appointments'
 import { getAppointment } from '../../services/appointments.service'
 
+import Illustration from '../../assets/undraw_time_management_re_tk5w.svg'
+
 import { AppointmentDetailComponent, TitleComponent } from '../../components'
 
 import * as S from './styles'
@@ -29,7 +31,12 @@ const AppointmentDetailsPage = () => {
   return (
     <S.AppointmentDetailsPageWrapper>
       <TitleComponent>Detalhes do compromisso</TitleComponent>
-      {appointmentState && <AppointmentDetailComponent {...appointmentState} />}
+      <S.SectionHeroWrapper>
+        {appointmentState && (
+          <AppointmentDetailComponent {...appointmentState} />
+        )}
+        <S.Illustration src={Illustration} />
+      </S.SectionHeroWrapper>
     </S.AppointmentDetailsPageWrapper>
   )
 }
