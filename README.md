@@ -1,46 +1,120 @@
-# Getting Started with Create React App
+# A simple calendar app made in React.JS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>Calendar App 📅</p>
 
-## Available Scripts
+<p>
+  <img src="https://img.shields.io/badge/made%20by-Vitor%20Santana-006edc?style=flat-square">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vitorSantanaDev/client-codesec-clone?color=006edc&style=flat-square">
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/vitorSantanaDev/client-landing-page-react?color=006edc&style=flat-square">
+</p>
 
-In the project directory, you can run:
+<img align="right" src="./src/assets/undraw_time_management_re_tk5w.svg" height="120">
 
-### `yarn start`
+## Tópicos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Sobre a aplicação](#sobre-a-landing-page)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[Tecnologias e Ferramentas](#tecnologias-e-ferramentas)
 
-### `yarn test`
+[Instalação e uso](#instalação-e-uso)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `yarn build`
+## App Calendar React.JS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
+ 📅 O projeto consiste em uma simples aplicação de calendário construído em React.JS, onde é possível criar, aceitar, cancelar e deletar compromissos.
+<br>
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Modo de usar.
 
-### `yarn eject`
+📃 No screenshot abaixo temos a Home, onde contém um calendário, clicando em uma das datas do calendário será popado um modal, onde terá 3 campos de inputs, um de data, um para o nome do compromisso e outro para descrição.
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<img align="center" src="./src/assets/home-hero.png" width="320">
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Modal para a criação do compromisso.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img align="center" src="./src/assets/modal-register.png" width="320">
+<br>
 
-## Learn More
+<br>
+📃 Após preencher todos os campos e cadastrar o compromisso, um card contendo as informações do mesmo, será exibido logo abaixo. Conforme você for cadastrando compromissos, vai sendo gerados outros cards, um para cada compromisso.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Card do compromisso.
+
+<img align="center" src="./src/assets/card-appointment.png" width="320">
+
+<br>
+📃 No card do compromisso contém todas as informações referentes ao mesmo. Também exitem 4 botões para ações. O primeiro botão que fica no canto inferior esquerdo, serve para cancelar o compromisso, o link do meio com o texto "Detalhes", te leva para a tela de detalhes do compromisso, o do canto inferior direto serve para aceitar o compromisso e o botão com ícone de lixeira, serve pra excluir compromisso.
+
+## Status do compromisso.
+
+<br>
+📃 Se você observar bem no card há uma label com a palavra "Status" seguido de um "-" mais o status em si. Conforme você for clicando nos botões de ações, o status do compromisso é alterado e a cor do card, textos e botões também mudam, para indicar o status do compromisso.
+
+<div>
+  <img align="left" src="./src/assets/status-oppened.png" height="120">
+  <img align="center" src="./src/assets/status-cancel.png" height="120">
+  <img align="right" src="./src/assets/status-approved.png" height="120">
+</div>
+
+<br>
+
+## Tela de detalhes.
+
+<img align="center" src="./src/assets/details-screen.png" width="320">
+
+<br>
+📃 Clicando no botão de detalhes você é redirecionado para a tela de detalhes, onde você consegue ver informmções mais detalhadas sobre o compromisso. Clicando no botão no canto inferior direito, um modal com os mesmos campos do modal de cadastro será popado em tela para que você posso editar as informações do seu compromisso.
+
+## Agora teste você mesmo 👇🏿
+
+[Calendar-App](https://onesight-app-frontend.netlify.app/)
+
+## Tecnologias e Ferramentas
+
+As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
+
+- [React.JS](https://pt-br.reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [styled-components](https://styled-components.com/)
+
+<br>
+
+## Instalação e Uso
+
+Para rodar a aplicação, você precisa instalar o [Node](https://nodejs.org/en/)
+
+Siga os passos abaixo:
+
+```bash
+# Abra um terminal e copie este repositório com o comando
+$ git clone https://github.com/vitorSantanaDev/onesight-app-front-end.git
+# ou use a opção de download.
+
+# Entre na pasta com
+$ cd onesight-app-front-end
+
+# Instale as dependências
+$ yarn install
+
+# Rode a aplicação
+$ yarn start
+```
+
+<br>
+
+---
+
+Feito com :technologist: by [Vitor_Santana](https://github.com/vitorSantanaDev)
+
+[![Linkedin Badge](https://img.shields.io/badge/-Vitor%20Santana-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/vitor-santana-bbb607217/)](https://www.linkedin.com/in/vitor-santana-bbb607217/)
+[![Gmail Badge](https://img.shields.io/badge/-vitorsantana.developer@gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:vitorsantana.developer@gmail)](mailto:vitorsantana.developer@gmail)
