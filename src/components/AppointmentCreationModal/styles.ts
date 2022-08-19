@@ -2,11 +2,14 @@ import styled from 'styled-components'
 
 export const ModalWrapper = styled.div`
   width: 100%;
+  height: 100%;
   min-height: 100%;
   padding: 0px 32px;
   z-index: 1000;
 
-  position: absolute;
+  top: 0;
+  left: 0;
+  position: fixed;
 
   background-color: rgba(0, 0, 0, 0.4);
 
